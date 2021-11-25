@@ -7764,7 +7764,9 @@ const dayjs = __webpack_require__(742);
 
 (function main() {
   const token = core.getInput("token");
+  console.log('token', token)
   const octokit = github.getOctokit(token);
+  console.log('octokit', octokit)
 
   createIssue(octokit);
 })();

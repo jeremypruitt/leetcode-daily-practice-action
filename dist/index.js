@@ -19705,7 +19705,7 @@ try {
   }).then((res) => {
     console.log("Hello, %s", res);
   }).catch((err) => {
-    console.log('每日打卡', token, err);
+    console.log('每日打卡', token + '-', err);
   })
   console.log(111, 'end');
 

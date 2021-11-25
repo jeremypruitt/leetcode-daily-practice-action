@@ -44,7 +44,7 @@ try {
 
   function getBody() {
     return `${mock[Math.floor(Math.random() * len)]}
-## 打卡示例：
+## 评论格式 - 示例：
 \`\`\`txt
 小石头：https://leetcode-cn.com/u/xingorg1/
 练习内容：队列实现

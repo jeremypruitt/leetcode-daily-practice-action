@@ -4,7 +4,7 @@
   "description": "算法每日打卡自动创建脚本",
   "main": "src/index.js",
   "scripts": {
-    "build": "ncc build src/index.js"
+    "build": "ncc build src/index.js --license licenses.txt"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
     "@actions/github": "^5.0.0",
     "dayjs": "^1.10.7",
     "octokit": "^1.7.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.32.0"
   }
 }

@@ -8,15 +8,7 @@ try {
   const octokit = new Octokit({
     auth: token,
   });
-
-  octokit.rest.users.getAuthenticated()
-    .then((res) => {
-      console.log("Hello, %s", res);
-    }).catch((err) => {
-      console.log('每日打卡', err);
-    })
-
-
+  // https://github.com/octokit/octokit.js#rest-api
   octokit.rest.issues.create({
     owner: "xingorg1",
     repo: "leetcode-daily-practice-action",
@@ -25,9 +17,9 @@ try {
   }).then((res) => {
     console.log("Hello, %s", res);
   }).catch((err) => {
-    console.log('每日打卡', err);
+    console.log('每日打卡', token, err);
   })
-  console.log(111);
+  console.log(111, 'end');
 
   // function getBody() {
   //   return "加油";
@@ -40,5 +32,5 @@ try {
   //   return dayjs().add("8", "hour").format("YYYY-MM-DD");
   // }
 } catch (err) {
-  console.log(err);
+  console.log('end-error', err);
 }

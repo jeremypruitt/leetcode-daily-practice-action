@@ -2,33 +2,21 @@ const core = require("@actions/core");
 const { Octokit } = require("octokit");
 const dayjs = require("dayjs");
 
-(function main() {
-  const token = core.getInput("token");
-  console.log('token', token)
-  const octokit = new Octokit({
-    auth: token,
-  });
-  console.log('octokit', octokit)
 
-  createIssue(octokit);
-})();
+const token = core.getInput("token");
+const octokit = new Octokit({
+  auth: token,
+});
 
-function createIssue(octokit) {
-  octokit.rest.issues.create({
-    owner: "xingorg1",
-    repo: "leetcodeRank",
-    title: getTitle(),
-    body: getBody(),
-  });
-}
-
-
-function getTitle() {
-  return `【每日打卡】 ${getDate()}`;
-}
+octokit.rest.issues.create({
+  owner: "xingorg1",
+  repo: "leetcode-daily-practice-action",
+  title: `【每日打卡】 ${ getDate() }`,
+  body: getBody(),
+});
 
 function getBody() {
-  return "⛽️ 加油";
+  return "加油";
 }
 
 function getDate() {

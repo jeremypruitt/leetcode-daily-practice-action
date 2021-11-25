@@ -1,8 +1,9 @@
 # Create Leetcode Daily Practice Issue Action
+
 automatic create daily practice issue for xingorg1/leetcodeRank
 
-
 ## usage
+
 ```yml
 jobs:
   create_leetcode_daily_practice_issue:

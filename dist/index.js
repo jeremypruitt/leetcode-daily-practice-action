@@ -19728,7 +19728,7 @@ try {
   // https://github.com/octokit/octokit.js#rest-api
   octokit.rest.issues.create({
     owner: "xingorg1",
-    repo: "leetcodeRank",
+    repo: "leetcode-daily-practice-action",
     title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
     body: getBody(),
   }).then((res) => {

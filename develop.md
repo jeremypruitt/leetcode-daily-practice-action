@@ -49,7 +49,13 @@ const octokit = new Octokit({
 // 参考文档：https://github.com/octokit/octokit.js
 ```
 
-5. run build 构建脚本
+5. run build 构建脚本 【测试 dev 版本 仓库为本仓库 leetcode-daily-practice-action】
+
+```js
+ncc build src/dev.js --license licenses.txt
+```
+
+5. run build 构建脚本 【发布 release 版本 仓库名称为 leetcodeRank】
 
 ```js
 ncc build src/index.js --license licenses.txt
@@ -58,7 +64,7 @@ ncc build src/index.js --license licenses.txt
 ## todo
 
 - [x] 定时创建 issue
-- [x] title累计打卡天数 （从2021-11-10开始第一天打卡，从当前日计算两个时间的天数差距）
+- [x] title 累计打卡天数 （从 2021-11-10 开始第一天打卡，从当前日计算两个时间的天数差距）
 - [ ] 创建新 issue 前，把上一个 issue 没有打卡的人数统计一下（自动打标签，根据打卡名单，排除已提交 issue 的人，剩下的人打成标签）
 
 ## Error: octokit 依赖升级，语法需要修改

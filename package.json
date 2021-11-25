@@ -4,6 +4,7 @@
   "description": "算法每日打卡自动创建脚本",
   "main": "src/index.js",
   "scripts": {
+    "dev": "ncc build src/dev.js --license licenses.txt",
     "build": "ncc build src/index.js --license licenses.txt"
   },
   "repository": {

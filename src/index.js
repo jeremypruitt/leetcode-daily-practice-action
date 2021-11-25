@@ -43,7 +43,13 @@ try {
   })
 
   function getBody() {
-    return mock[Math.floor(Math.random() * len)];
+    return `${mock[Math.floor(Math.random() * len)]}
+## 打卡示例：
+小石头：https://leetcode-cn.com/u/xingorg1/
+练习内容：队列实现
+累计总数：100
+今日增加：1
+`;
   }
 
   function getDate() {

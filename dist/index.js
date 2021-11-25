@@ -19729,7 +19729,7 @@ try {
   octokit.rest.issues.create({
     owner: "xingorg1",
     repo: "leetcode-daily-practice-action",
-    title: `【每日打卡】${getDate()}`,
+    title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
     body: getBody(),
   }).then((res) => {
     console.log("issue创建成功啦！！", JSON.stringify(res));
@@ -19754,6 +19754,9 @@ try {
     // 需要转换成 中国时区
     // 中国时区 = UTC时区 + 8小时
     return dayjs().add("8", "hour").format("YYYY-MM-DD");
+  }
+  function getDayDiff() {
+    return dayjs().diff('2021-11-10', 'day') + 1
   }
 
 } catch (err) {

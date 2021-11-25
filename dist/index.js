@@ -18366,21 +18366,35 @@ exports.createNodeMiddleware = createNodeMiddleware;
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
 const core = __webpack_require__(827);
-const { Octokit } = __webpack_require__(398);
+const { Octokit } = __webpack_require__(398); // https://github.com/octokit/octokit.js
 // const dayjs = require("dayjs");
 
 try {
+
   const token = core.getInput("token");
   const octokit = new Octokit({
     auth: token,
   });
+
+  octokit.rest.users.getAuthenticated()
+    .then((res) => {
+      console.log("Hello, %s", res);
+    }).catch((err) => {
+      console.log('每日打卡', err);
+    })
+
 
   octokit.rest.issues.create({
     owner: "xingorg1",
     repo: "leetcode-daily-practice-action",
     title: `【每日打卡】`,
     body: "加油",
-  });
+  }).then((res) => {
+    console.log("Hello, %s", res);
+  }).catch((err) => {
+    console.log('每日打卡', err);
+  })
+  console.log(111);
 
   // function getBody() {
   //   return "加油";

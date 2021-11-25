@@ -1,0 +1,29 @@
+{
+  "name": "leetcode-daily-practice-action",
+  "version": "1.0.0",
+  "description": "算法每日打卡自动创建脚本",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "ncc build src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xingorg1/leetcode-daily-practice-action.git"
+  },
+  "keywords": [
+    "算法",
+    "打卡"
+  ],
+  "author": "xingorg1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xingorg1/leetcode-daily-practice-action/issues"
+  },
+  "homepage": "https://github.com/xingorg1/leetcode-daily-practice-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "dayjs": "^1.10.7",
+    "octokit": "^1.7.0"
+  }
+}

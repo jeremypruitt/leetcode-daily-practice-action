@@ -1,0 +1,9 @@
+name: "Create Leetcode Daily Practice Issue"
+description: "automatic create daily practice issue for xingorg1/leetcodeRank"
+inputs:
+  token: 
+    description: "github token"
+    required: true
+runs:
+  using: "node12"
+  main: "dist/index.js"

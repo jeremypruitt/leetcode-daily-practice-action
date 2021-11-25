@@ -18369,29 +18369,33 @@ const core = __webpack_require__(827);
 const { Octokit } = __webpack_require__(398);
 // const dayjs = require("dayjs");
 
+try {
+  const token = core.getInput("token");
+  const octokit = new Octokit({
+    auth: token,
+  });
 
-const token = core.getInput("token");
-const octokit = new Octokit({
-  auth: token,
-});
+  octokit.rest.issues.create({
+    owner: "xingorg1",
+    repo: "leetcode-daily-practice-action",
+    title: `【每日打卡】`,
+    body: "加油",
+  });
 
-octokit.rest.issues.create({
-  owner: "xingorg1",
-  repo: "leetcode-daily-practice-action",
-  title: `【每日打卡】`,
-  body: "加油",
-});
+  // function getBody() {
+  //   return "加油";
+  // }
 
-// function getBody() {
-//   return "加油";
-// }
+  // function getDate() {
+  //   // 运行环境是 UTC 时区
+  //   // 需要转换成 中国时区
+  //   // 中国时区 = UTC时区 + 8小时
+  //   return dayjs().add("8", "hour").format("YYYY-MM-DD");
+  // }
+} catch (err) {
+  console.log(err);
+}
 
-// function getDate() {
-//   // 运行环境是 UTC 时区
-//   // 需要转换成 中国时区
-//   // 中国时区 = UTC时区 + 8小时
-//   return dayjs().add("8", "hour").format("YYYY-MM-DD");
-// }
 
 /***/ }),
 

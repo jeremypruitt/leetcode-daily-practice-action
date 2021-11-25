@@ -1,6 +1,6 @@
 const core = require("@actions/core");
 const { Octokit } = require("octokit"); // https://github.com/octokit/octokit.js
-// const dayjs = require("dayjs");
+const dayjs = require("dayjs");
 
 try {
 

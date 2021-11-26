@@ -19595,12 +19595,18 @@ module.exports = async function createIssueAction({ owner, repo }) {
               edges {
                 node {
                   title,
-                  labels,
+                  labels {
+                    name
+                  },
                   number,
                   milestone {
                     title
                   },
-                  comments
+                  comments {
+                    user {
+                      login
+                    }
+                  }
                 }
               }
             }
@@ -19616,8 +19622,28 @@ module.exports = async function createIssueAction({ owner, repo }) {
     }).catch((err) => {
       console.log('lastIssues获取失败', err);
     })
+
     // 获取所有labels https://github.com/xingorg1/leetcode-daily-practice-action/labels
-    console.log(octokit.rest.issues);
+    octokit.rest.issues.addLabels({
+      owner,
+      repo,
+    }).then((res) => {
+      console.log("获取所有labels！！", JSON.stringify(res));
+    }).catch((err) => {
+      console.log('获取所有labels失败', err);
+    })
+
+    // 获取最近一条issue的所有comments
+    // https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/issues/15/comments
+    octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/comments", {
+      owner: "octocat",
+      repo: "hello-world",
+      issue_number: 15
+    }).then((res) => {
+      console.log("所有的comments！！", JSON.stringify(res));
+    }).catch((err) => {
+      console.log('所有的comments失败', err);
+    })
 
     /* // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({

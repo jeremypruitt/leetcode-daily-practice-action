@@ -24,14 +24,11 @@ module.exports = async function createIssueAction({ owner, repo }) {
       per_page: 100,
       page: 1
     })
-    console.log(labelsData);
     if (labelsData && labelsData.data) {
       labelsData.data.forEach((label) => {
         allLables[label.description] = label
       })
-      console.log('所有的label名单', allLables);
-    } else {
-      throw new Error('0、获取所有labels 失败')
+      console.log('所有的label名单', Object.keys(allLables));
     }
     /**
      * 1、获取最近一条 issues
@@ -44,8 +41,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     })
     if (issueInfo && issueInfo.data) {
       issue_number = (issueInfo.data[0] && issueInfo.data[0].number) || 0
-    } else {
-      throw new Error('1、获取最近一条issues 失败')
+      console.log('获取最近一条 issues_number', issue_number);
     }
     /**
      * 2、获取最近一条 issue 的所有 comments，求差级得到未打卡名单
@@ -59,15 +55,13 @@ module.exports = async function createIssueAction({ owner, repo }) {
       page: 1
     })
     if (comments && comments.data) {
-      let completeUser = comments.data.map((comment) => comment.user.login)
+      let completeUser = comments.data.map((comment) => comment.user.login),
+        all = new Set(Object.keys(allLables))
       console.log(all, Object.keys(allLables), completeUser);
-      all = new Set(Object.keys(allLables))
       completeUser = new Set(completeUser)
       unCompleteUser = [...new Set([...all].filter(user => !completeUser.has(user)))]
       labelsName = unCompleteUser.map(user => allLables[user].name)
       console.log(unCompleteUser, labelsName);
-    } else {
-      throw new Error('2、获取最近一条 issue 的所有 comments 失败了')
     }
 
     /**

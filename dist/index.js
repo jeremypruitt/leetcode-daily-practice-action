@@ -19666,7 +19666,7 @@ const getUTCtime = () => {
 }
 
 const getDate = () => {
-  let time = getUTCtime() // .format("YYYY-MM-DD");
+  let time = getUTCtime().format("YYYY-MM-DD");
   console.log('getDate', time);
   return time
 }

@@ -19623,7 +19623,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     const addLabel = await octokit.rest.issues.addLabels({
       owner,
       repo,
-      issue_number: 15,
+      issue_number,
       labels: labelsName
     })
     console.log('添加labels', addLabel)

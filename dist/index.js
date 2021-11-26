@@ -19558,18 +19558,54 @@ const { getDate, getDayDiff } = __nccwpck_require__(9864)
 
 const {
   Octokit
-} = __nccwpck_require__(7467); 
+} = __nccwpck_require__(7467);
 
-module.exports = function createIssueAction(repo) {
+module.exports = async function createIssueAction({ owner, repo }) {
   try {
     const token = core.getInput("token");
     const octokit = new Octokit({
       auth: token,
     });
 
+    // 迭代所有issue https://github.com/octokit/octokit.js#pagination
+    // const iterator = octokit.paginate.iterator(octokit.rest.issues.listForRepo, {
+    //   owner: "octocat",
+    //   repo: "hello-world",
+    //   per_page: 100,
+    // });
+
+    // // iterate through each response
+    // for await (const { data: issues } of iterator) {
+    //   for (const issue of issues) {
+    //     console.log("Issue #%d: %s", issue.number, issue.title);
+    //   }
+    // }
+
+    // 获取最近的几条issue https://github.com/octokit/octokit.js#graphql-api-queries
+    const { lastIssues } = await octokit.graphql(
+      `
+        query lastIssues($owner: String!, $repo: String!, $num: Int = 1) {
+          repository(owner: $owner, name: $repo) {
+            issues(last: $num) {
+              edges {
+                node {
+                  title
+                }
+              }
+            }
+          }
+        }
+      `,
+      {
+        owner,
+        repo,
+      }
+    )
+    console.log(lastIssues);
+
     // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({
-      owner: "xingorg1",
+      owner,
       repo,
       title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
       body: getBody(),
@@ -19805,7 +19841,10 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 const createIssueAction = __nccwpck_require__(1192);
-createIssueAction('leetcode-daily-practice-action')
+createIssueAction({
+  owner: 'xingorg1', 
+  repo: 'leetcode-daily-practice-action'
+})
 
 })();
 

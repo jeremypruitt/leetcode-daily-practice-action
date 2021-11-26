@@ -19570,7 +19570,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       allLables = {}, // {label.description(github user login): label}
       labelsName = []
     // 0、获取所有labels
-    const labelsData = octokit.request("GET /repos/{owner}/{repo}/labels", {
+    const labelsData = await octokit.request("GET /repos/{owner}/{repo}/labels", {
       owner,
       repo,
       per_page: 100,

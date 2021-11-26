@@ -19623,14 +19623,17 @@ module.exports = async function createIssueAction({ owner, repo }) {
       console.log('lastIssues获取失败', err);
     })
 
-    // 获取所有labels https://github.com/xingorg1/leetcode-daily-practice-action/labels
+    // 批量添加labels https://github.com/xingorg1/leetcode-daily-practice-action/labels
+    // octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/labels", {})
     octokit.rest.issues.addLabels({
       owner,
       repo,
+      issue_number: 15,
+      labels: ['小石头', 'good first issue']
     }).then((res) => {
-      console.log("获取所有labels！！", JSON.stringify(res));
+      console.log("批量添加labels！！", JSON.stringify(res));
     }).catch((err) => {
-      console.log('获取所有labels失败', err);
+      console.log('批量添加labels失败', err);
     })
 
     // 获取最近一条issue的所有comments
@@ -19638,12 +19641,21 @@ module.exports = async function createIssueAction({ owner, repo }) {
     octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/comments", {
       owner: "octocat",
       repo: "hello-world",
-      issue_number: 15
+      issue_number: 15,
+      per_page: 100,
+      page: 1
     }).then((res) => {
-      console.log("所有的comments！！", JSON.stringify(res));
+      console.log("所有的comments！！", res && JSON.stringify(res.data));
     }).catch((err) => {
       console.log('所有的comments失败', err);
     })
+    /**
+     * await octokit.request('GET /repos/{owner}/{repo}/issues/comments/{comment_id}', {
+        owner: 'octocat',
+        repo: 'hello-world',
+        comment_id: 42
+      })
+     */
 
     /* // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({

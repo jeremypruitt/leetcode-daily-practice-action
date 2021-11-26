@@ -69,6 +69,13 @@ ncc build src/index.js --license licenses.txt
 - [ ] 【自动打标签】，根据打卡名单，排除已提交 issue 的人，剩下的人打成标签）
 - [ ] 加入【里程碑】
 - [ ] 创建失败给我【发邮件】
+## 文档和API
+- [OPEN API](https://www.openapis.org/)
+- [Github REST API](https://docs.github.com/en/rest)
+- [Github REST API - Issue相关](https://docs.github.com/en/rest/reference/issues)
+- [REST API 博文](https://developer.github.com/changes/2020-04-07-expanding-rest-api-support-for-the-triage-and-maintain-roles/)
+- [octokit](https://github.com/octokit/octokit.js)
+- [octokit.rest 所有的API](https://github.com/octokit/plugin-rest-endpoint-methods.js/tree/master/docs)
 
 ## Error: octokit 依赖升级，语法需要修改
 

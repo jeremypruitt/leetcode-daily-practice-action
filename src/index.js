@@ -1,2 +1,5 @@
 const createIssueAction = require("./core");
-createIssueAction('leetcodeRank')
+createIssueAction({
+  owner: 'xingorg1', 
+  repo: 'leetcodeRank'
+})

@@ -6,9 +6,9 @@ const { getDate, getDayDiff } = require('./date')
 
 const {
   Octokit
-} = require("octokit"); 
+} = require("octokit");
 
-module.exports = function createIssueAction(repo) {
+module.exports = async function createIssueAction({ owner, repo }) {
   try {
     const token = core.getInput("token");
     const octokit = new Octokit({
@@ -17,7 +17,7 @@ module.exports = function createIssueAction(repo) {
 
     // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({
-      owner: "xingorg1",
+      owner,
       repo,
       title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
       body: getBody(),

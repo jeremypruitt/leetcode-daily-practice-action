@@ -1,7 +1,9 @@
 // https://github.com/octokit/octokit.js
 const core = require("@actions/core");
-const { getBody } = require('./body')
+const getBody = require('./body')
 const { getDate, getDayDiff } = require('./date')
+// console.log(getBody);return false
+
 const {
   Octokit
 } = require("octokit"); 

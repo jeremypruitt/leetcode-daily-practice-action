@@ -1,5 +1,5 @@
 const { getBody } = require('./body')
-const { getDate, getDayDiff } = require('./body')
+const { getDate, getDayDiff } = require('./date')
 const core = require("@actions/core");
 // https://github.com/octokit/octokit.js
 const {

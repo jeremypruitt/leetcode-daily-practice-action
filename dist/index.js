@@ -19618,15 +19618,15 @@ module.exports = async function createIssueAction({ owner, repo }) {
 
     /**
      * 3、批量添加labels（未打卡）
+     * octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/labels", {})
      */
-    // octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/labels", {})
-    // const addLabel = await octokit.rest.issues.addLabels({
-    //   owner,
-    //   repo,
-    //   issue_number: 15,
-    //   labels: labelsName
-    // })
-    // console.log('添加labels', addLabel)
+    const addLabel = await octokit.rest.issues.addLabels({
+      owner,
+      repo,
+      issue_number: 15,
+      labels: labelsName
+    })
+    console.log('添加labels', addLabel)
 
 
     /**

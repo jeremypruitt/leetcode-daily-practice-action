@@ -30,7 +30,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     // }
 
     // 获取最近的几条issue https://github.com/octokit/octokit.js#graphql-api-queries
-    const { lastIssues } = await octokit.graphql(
+    octokit.graphql(
       `
         query lastIssues($owner: String!, $repo: String!, $num: Int = 1) {
           repository(owner: $owner, name: $repo) {
@@ -48,8 +48,11 @@ module.exports = async function createIssueAction({ owner, repo }) {
         owner,
         repo,
       }
-    )
-    console.log(lastIssues);
+    ).then((res) => {
+      console.log("lastIssues！！", JSON.stringify(res));
+    }).catch((err) => {
+      console.log('lastIssues获取失败', err);
+    })
 
     // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({

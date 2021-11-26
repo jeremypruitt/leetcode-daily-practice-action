@@ -19550,10 +19550,10 @@ module.exports = function getBody() {
 /***/ 1192:
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
+// https://github.com/octokit/octokit.js
+const core = __nccwpck_require__(2186);
 const { getBody } = __nccwpck_require__(9930)
 const { getDate, getDayDiff } = __nccwpck_require__(9864)
-const core = __nccwpck_require__(2186);
-// https://github.com/octokit/octokit.js
 const {
   Octokit
 } = __nccwpck_require__(7467); 
@@ -19584,7 +19584,7 @@ module.exports = function createIssueAction(repo) {
 /***/ }),
 
 /***/ 9864:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+/***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const dayjs = __nccwpck_require__(7401);
 /**
@@ -19592,22 +19592,27 @@ const dayjs = __nccwpck_require__(7401);
  * 需要转换成 中国时区
  * 中国时区 = UTC时区 + 8小时
  */
-exports.getUTCtime = () => {
+const getUTCtime = () => {
   let time = dayjs().add("8", "hour")
   console.log('getUTCtime', time)
   return time
 }
 
-exports.getDate = () => {
+const getDate = () => {
   let time = getUTCtime().format("YYYY-MM-DD");
   console.log('getDate', time);
   return time
 }
 
-exports.getDayDiff = () => {
+const getDayDiff = () => {
   let time = getUTCtime().diff('2021-11-10', 'day') + 1
   console.log('getDayDiff', time);
   return time
+}
+module.exports = {
+  getUTCtime,
+  getDate,
+  getDayDiff
 }
 
 /***/ }),

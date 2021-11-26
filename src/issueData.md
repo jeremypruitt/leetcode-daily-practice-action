@@ -504,3 +504,114 @@ octokit.request('GET /repos/{owner}/{repo}/issues/comments', {
   console.log('2comments失败', err);
 }) */
 ```
+
+# 获取所有 labels
+
+```js
+// 3、获取所有labels
+//  /repos/{owner}/{repo}/labels
+octokit
+  .request('GET /repos/{owner}/{repo}/labels', {
+    owner,
+    repo,
+    per_page: 100,
+    page: 1,
+  })
+  .then(res => {
+    console.log('labels成功！！', JSON.stringify(res.data))
+    // res.data.map(() => {
+
+    // })
+  })
+  .catch(err => {
+    console.log('labels创建失败', err)
+  })
+```
+
+labels 成功！！
+
+```json
+[
+  {
+    "id": 3582509879,
+    "node_id": "LA_kwDOGbveZ87ViMM3",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/documentation",
+    "name": "documentation",
+    "color": "0075ca",
+    "default": true,
+    "description": "Improvements or additions to documentation"
+  },
+  {
+    "id": 3582509882,
+    "node_id": "LA_kwDOGbveZ87ViMM6",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/duplicate",
+    "name": "duplicate",
+    "color": "cfd3d7",
+    "default": true,
+    "description": "This issue or pull request already exists"
+  },
+  {
+    "id": 3582509884,
+    "node_id": "LA_kwDOGbveZ87ViMM8",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/enhancement",
+    "name": "enhancement",
+    "color": "a2eeef",
+    "default": true,
+    "description": "New feature or request"
+  },
+  {
+    "id": 3582509888,
+    "node_id": "LA_kwDOGbveZ87ViMNA",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/good%20first%20issue",
+    "name": "good first issue",
+    "color": "7057ff",
+    "default": true,
+    "description": "Good for newcomers"
+  },
+  {
+    "id": 3582509886,
+    "node_id": "LA_kwDOGbveZ87ViMM-",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/help%20wanted",
+    "name": "help wanted",
+    "color": "008672",
+    "default": true,
+    "description": "Extra attention is needed"
+  },
+  {
+    "id": 3582509890,
+    "node_id": "LA_kwDOGbveZ87ViMNC",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/invalid",
+    "name": "invalid",
+    "color": "e4e669",
+    "default": true,
+    "description": "This doesn't seem right"
+  },
+  {
+    "id": 3582509892,
+    "node_id": "LA_kwDOGbveZ87ViMNE",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/question",
+    "name": "question",
+    "color": "d876e3",
+    "default": true,
+    "description": "Further information is requested"
+  },
+  {
+    "id": 3582509893,
+    "node_id": "LA_kwDOGbveZ87ViMNF",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/wontfix",
+    "name": "wontfix",
+    "color": "ffffff",
+    "default": true,
+    "description": "This will not be worked on"
+  },
+  {
+    "id": 3583664054,
+    "node_id": "LA_kwDOGbveZ87Vml-2",
+    "url": "https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/labels/%E5%B0%8F%E7%9F%B3%E5%A4%B4",
+    "name": "小石头",
+    "color": "B60205",
+    "default": false,
+    "description": "xingorg1"
+  }
+]
+```

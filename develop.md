@@ -66,8 +66,8 @@ ncc build src/index.js --license licenses.txt
 2、新人提交力扣账号、
 3、排行榜增加力扣账号
 4、定花名（同微信群备注）
-5、增加 label 标签
-6、label id增加到github action流水线
+5、增加 label 标签 ⚠️ label的name为微信备注、label的desc为github账号
+// 6、label id增加到github action流水线
 
 ## todo
 
@@ -77,6 +77,7 @@ ncc build src/index.js --license licenses.txt
 - [ ] 【自动打标签】，根据打卡名单，排除已提交 issue 的人，剩下的人打成标签）
 - [ ] 加入【里程碑】
 - [ ] 创建失败给我【发邮件】
+
 ## 文档和API
 - [OPEN API](https://www.openapis.org/)
 - [Github REST API](https://docs.github.com/en/rest)

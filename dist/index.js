@@ -19567,7 +19567,23 @@ module.exports = async function createIssueAction({ owner, repo }) {
       auth: token,
     });
     let issue_number = 0,
+      allLables = {}, // {label.description(github user login): label}
       labelsName = []
+    // 0、获取所有labels
+    const labelsData = octokit.request("GET /repos/{owner}/{repo}/labels", {
+      owner,
+      repo,
+      per_page: 100,
+      page: 1
+    })
+    if (labelsData && labelsData.data) {
+      labelsData.data.forEach((label) => {
+        allLables[label.description] = label
+      })
+      console.log('所有的label名单', allLables);
+    } else {
+      throw new Error('0、获取所有labels 失败')
+    }
     /**
      * 1、获取最近一条 issues
      */
@@ -19580,7 +19596,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     if (issueInfo && issueInfo.data) {
       issue_number = (issueInfo.data[0] && issueInfo.data[0].number) || 0
     } else {
-      throw new Error('获取最近一条issues 失败')
+      throw new Error('1、获取最近一条issues 失败')
     }
     /**
      * 2、获取最近一条 issue 的所有 comments，求差级得到未打卡名单
@@ -19594,25 +19610,17 @@ module.exports = async function createIssueAction({ owner, repo }) {
       page: 1
     })
     if (comments && comments.data) {
-      labelsName = comments.data.map((comment) => comment.user.login)
+      let completeUser = comments.data.map((comment) => comment.user.login)
+      console.log(all, Object.keys(allLables), completeUser);
+      all = new Set(Object.keys(allLables))
+      completeUser = new Set(completeUser)
+      unCompleteUser = [...new Set([...all].filter(user => !completeUser.has(user)))]
+      labelsName = unCompleteUser.map(user => allLables[user].name)
+      console.log(unCompleteUser, labelsName);
     } else {
-      throw new Error('获取最近一条 issue 的所有 comments 失败了')
+      throw new Error('2、获取最近一条 issue 的所有 comments 失败了')
     }
-    // 3、获取所有labels
-    //  /repos/{owner}/{repo}/labels
-    octokit.request("GET /repos/{owner}/{repo}/labels", {
-      owner,
-      repo,
-      per_page: 100,
-      page: 1
-    }).then((res) => {
-      console.log("labels成功！！", JSON.stringify(res.data));
-      // res.data.map(() => {
 
-      // })
-    }).catch((err) => {
-      console.log('labels创建失败', err);
-    })
     /**
      * 3、批量添加labels（未打卡）
      */
@@ -19621,8 +19629,9 @@ module.exports = async function createIssueAction({ owner, repo }) {
     //   owner,
     //   repo,
     //   issue_number: 15,
-    //   labels: ['小石头', 'good first issue']
+    //   labels: labelsName
     // })
+    // console.log('添加labels', addLabel)
 
 
     /**

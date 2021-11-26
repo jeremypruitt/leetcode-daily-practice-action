@@ -19634,7 +19634,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     /**
      * 4、创建issue https://github.com/octokit/octokit.js#rest-api
      */
-    /*
+    
     octokit.rest.issues.create({
       owner,
       repo,
@@ -19644,7 +19644,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       console.log("issue创建成功啦！！", JSON.stringify(res));
     }).catch((err) => {
       console.log('issue创建失败', err);
-    }) */
+    })
   } catch (err) {
     console.log('end-error', err);
   }
@@ -19668,7 +19668,7 @@ const getUTCtime = () => {
 }
 
 const getDate = () => {
-  let time = getUTCtime().format("YYYY-MM-DD");
+  let time = getUTCtime() // .format("YYYY-MM-DD");
   console.log('getDate', time);
   return time
 }

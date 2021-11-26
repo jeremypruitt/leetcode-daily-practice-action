@@ -68,31 +68,29 @@ module.exports = async function createIssueAction({ owner, repo }) {
      * 3、批量添加labels（未打卡）
      * octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/labels", {})
      */
-    if(labelsName.length > 0) {
+    if (labelsName.length > 0) {
       const addLabel = await octokit.rest.issues.addLabels({
         owner,
         repo,
         issue_number,
         labels: labelsName
       })
-      console.log('添加labels', addLabel)
+      console.log('添加labels成功', addLabel)
     }
 
 
     /**
      * 4、创建issue https://github.com/octokit/octokit.js#rest-api
      */
-    
-    octokit.rest.issues.create({
+
+    const createIssue = await octokit.rest.issues.create({
       owner,
       repo,
       title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
       body: setBody(),
-    }).then((res) => {
-      console.log("issue创建成功啦！！", JSON.stringify(res));
-    }).catch((err) => {
-      console.log('issue创建失败', err);
     })
+    console.log('创建issue成功', createIssue);
+
   } catch (err) {
     console.log('end-error', err);
   }

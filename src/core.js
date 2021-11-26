@@ -19,14 +19,18 @@ module.exports = async function createIssueAction({ owner, repo }) {
     const iteratorData = octokit.paginate.iterator(octokit.rest.issues.listForRepo, {
       owner,
       repo,
-      per_page: 2,
+      per_page: 1,
     });
 
     // iterate through each response
-    for await (const { data: issues } of iteratorData) {
-      for (const issue of issues) {
-        console.log("Issue #%d: %s", issue.number, issue.title);
-        console.log("【每条issue详细信息】", JSON.stringify(issue));
+    for await (const { data: issuesData } of iteratorData) {
+      for (const issueItem of issuesData) {
+        console.log("IssueItem #%d: %s", issueItem.number, issueItem.title, issueItem.labels);
+        // console.log("【每条issue详细信息】", JSON.stringify(issueItem));
+        let labelsData = issueItem.labels.map((label) => {
+          return label.name
+        })
+        console.log(labelsData);
       }
     }
 
@@ -38,7 +42,13 @@ module.exports = async function createIssueAction({ owner, repo }) {
             issues(last: $num) {
               edges {
                 node {
-                  title
+                  title,
+                  labels,
+                  number,
+                  milestone {
+                    title
+                  },
+                  comments
                 }
               }
             }
@@ -54,6 +64,8 @@ module.exports = async function createIssueAction({ owner, repo }) {
     }).catch((err) => {
       console.log('lastIssues获取失败', err);
     })
+    // 获取所有labels https://github.com/xingorg1/leetcode-daily-practice-action/labels
+    console.log(octokit.rest.issues);
 
     /* // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({

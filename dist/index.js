@@ -19586,7 +19586,8 @@ module.exports = async function createIssueAction({ owner, repo }) {
       }
     } */
 
-    // 获取最近的几条issue https://github.com/octokit/octokit.js#graphql-api-queries
+    /* // 获取最近的几条issue https://github.com/octokit/octokit.js#graphql-api-queries
+    const issue_number = 0
     octokit.graphql(
       `
         query lastIssues($owner: String!, $repo: String!, $num: Int = 1) {
@@ -19607,7 +19608,20 @@ module.exports = async function createIssueAction({ owner, repo }) {
         repo,
       }
     ).then((res) => {
+      // {"repository":{"issues":{"edges":[{"node":{"title":"【每日打卡】2021-11-26 第17天 【】【】【】","number":15}}]}}}
+      // issue_number = number
       console.log("lastIssues！！", JSON.stringify(res));
+    }).catch((err) => {
+      console.log('lastIssues获取失败', err);
+    }) */
+
+    octokit.request("GET /repos/{owner}/{repo}/issues", {
+      owner,
+      repo,
+      per_page: 1,
+      page: 1
+    }).then((res) => {
+      console.log("最近一条issue获取：", res && JSON.stringify(res.data));
     }).catch((err) => {
       console.log('lastIssues获取失败', err);
     })
@@ -19628,8 +19642,8 @@ module.exports = async function createIssueAction({ owner, repo }) {
     // 获取最近一条issue的所有comments
     // https://api.github.com/repos/xingorg1/leetcode-daily-practice-action/issues/15/comments
     octokit.request("GET /repos/{owner}/{repo}/issues/{issue_number}/comments", {
-      owner: "octocat",
-      repo: "hello-world",
+      owner,
+      repo,
       issue_number: 15,
       per_page: 100,
       page: 1
@@ -19639,7 +19653,8 @@ module.exports = async function createIssueAction({ owner, repo }) {
       console.log('所有的comments失败', err);
     })
 
-    /* 【失败】octokit.request('GET /repos/{owner}/{repo}/issues/comments/{comment_id}', {
+    /* // 获取所有comments
+    octokit.request('GET /repos/{owner}/{repo}/issues/comments', {
       owner,
       repo,
       comment_id: 2
@@ -19647,8 +19662,8 @@ module.exports = async function createIssueAction({ owner, repo }) {
       console.log("2comments！！", res && JSON.stringify(res.data));
     }).catch((err) => {
       console.log('2comments失败', err);
-    })
- */
+    }) */
+
 
     /* // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({

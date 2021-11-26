@@ -19533,7 +19533,7 @@ const mock = [
 ]
 const len = mock.length
 
-module.exports = function getBody() {
+module.exports = function setBody() {
   return `**${mock[Math.floor(Math.random() * len)]}**
 ## 评论格式 - 示例：
 \`\`\`txt
@@ -19552,9 +19552,9 @@ module.exports = function getBody() {
 
 // https://github.com/octokit/octokit.js
 const core = __nccwpck_require__(2186);
-const getBody = __nccwpck_require__(9930)
+const setBody = __nccwpck_require__(9930)
 const { getDate, getDayDiff } = __nccwpck_require__(9864)
-// console.log(getBody);return false
+// console.log(setBody);return false
 
 const {
   Octokit
@@ -19566,7 +19566,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     const octokit = new Octokit({
       auth: token,
     });
-    const issue_number = 0,
+    let issue_number = 0,
       labelsName = []
     /**
      * 1、获取最近一条 issues
@@ -19633,7 +19633,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       owner,
       repo,
       title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
-      body: getBody(),
+      body: setBody(),
     }).then((res) => {
       console.log("issue创建成功啦！！", JSON.stringify(res));
     }).catch((err) => {

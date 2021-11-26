@@ -1,8 +1,8 @@
 // https://github.com/octokit/octokit.js
 const core = require("@actions/core");
-const getBody = require('./body')
+const setBody = require('./body')
 const { getDate, getDayDiff } = require('./date')
-// console.log(getBody);return false
+// console.log(setBody);return false
 
 const {
   Octokit
@@ -14,7 +14,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
     const octokit = new Octokit({
       auth: token,
     });
-    const issue_number = 0,
+    let issue_number = 0,
       labelsName = []
     /**
      * 1、获取最近一条 issues
@@ -81,7 +81,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       owner,
       repo,
       title: `【每日打卡】${getDate()} 第${getDayDiff()}天`,
-      body: getBody(),
+      body: setBody(),
     }).then((res) => {
       console.log("issue创建成功啦！！", JSON.stringify(res));
     }).catch((err) => {

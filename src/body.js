@@ -20,7 +20,7 @@ const mock = [
 ]
 const len = mock.length
 
-module.exports = function getBody() {
+module.exports = function setBody() {
   return `**${mock[Math.floor(Math.random() * len)]}**
 ## 评论格式 - 示例：
 \`\`\`txt

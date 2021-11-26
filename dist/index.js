@@ -19872,7 +19872,7 @@ var __webpack_exports__ = {};
 const createIssueAction = __nccwpck_require__(1192);
 createIssueAction({
   owner: 'xingorg1', 
-  repo: 'leetcode-daily-practice-action'
+  repo: 'leetcodeRank'
 })
 
 })();

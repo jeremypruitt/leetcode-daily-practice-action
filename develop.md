@@ -73,10 +73,10 @@ ncc build src/index.js --license licenses.txt
 
 - [x] 定时创建 issue
 - [x] title 累计打卡天数 （从 2021-11-10 开始第一天打卡，从当前日计算两个时间的天数差距）
-- [ ] 【获取前一个issue】创建新 issue 前，把上一个 issue 没有打卡的人数统计一下
-- [ ] 【自动打标签】，根据打卡名单，排除已提交 issue 的人，剩下的人打成标签）
-- [ ] 加入【里程碑】
+- [x] 【获取前一个issue】创建新 issue 前，把上一个 issue 没有打卡的人数统计一下
+- [x] 【自动打标签】，根据打卡名单，排除已提交 issue 的人，剩下的人打成标签）
 - [ ] 创建失败给我【发邮件】
+- [ ] 加入【里程碑】
 
 ## 文档和API
 - [OPEN API](https://www.openapis.org/)

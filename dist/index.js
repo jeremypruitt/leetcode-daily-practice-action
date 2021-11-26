@@ -19567,11 +19567,11 @@ module.exports = async function createIssueAction({ owner, repo }) {
       auth: token,
     });
 
-    // 迭代所有issue https://github.com/octokit/octokit.js#pagination
+    /* // 迭代所有issue https://github.com/octokit/octokit.js#pagination
     const iteratorData = octokit.paginate.iterator(octokit.rest.issues.listForRepo, {
       owner,
       repo,
-      per_page: 1,
+      per_page: 10,
     });
 
     // iterate through each response
@@ -19584,7 +19584,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
         })
         console.log(labelsData);
       }
-    }
+    } */
 
     // 获取最近的几条issue https://github.com/octokit/octokit.js#graphql-api-queries
     octokit.graphql(
@@ -19595,18 +19595,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
               edges {
                 node {
                   title,
-                  labels {
-                    name
-                  },
-                  number,
-                  milestone {
-                    title
-                  },
-                  comments {
-                    user {
-                      login
-                    }
-                  }
+                  number
                 }
               }
             }
@@ -19618,7 +19607,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
         repo,
       }
     ).then((res) => {
-      console.log("lastIssues！！", JSON.stringify(res));
+      console.log("lastIssues！！", title, number, JSON.stringify(res));
     }).catch((err) => {
       console.log('lastIssues获取失败', err);
     })
@@ -19649,13 +19638,17 @@ module.exports = async function createIssueAction({ owner, repo }) {
     }).catch((err) => {
       console.log('所有的comments失败', err);
     })
-    /**
-     * await octokit.request('GET /repos/{owner}/{repo}/issues/comments/{comment_id}', {
-        owner: 'octocat',
-        repo: 'hello-world',
-        comment_id: 42
-      })
-     */
+
+    octokit.request('GET /repos/{owner}/{repo}/issues/comments/{comment_id}', {
+      owner,
+      repo,
+      comment_id: 2
+    }).then((res) => {
+      console.log("2comments！！", res && JSON.stringify(res.data));
+    }).catch((err) => {
+      console.log('2comments失败', err);
+    })
+
 
     /* // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({

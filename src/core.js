@@ -26,7 +26,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       page: 1
     })
     if (issueInfo && issueInfo.data) {
-      issue_number = issueInfo[0]?.number || 0
+      issue_number = (issueInfo.data[0] && issueInfo.data[0].number) || 0
     } else {
       throw new Error('获取最近一条issues 失败')
     }

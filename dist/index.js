@@ -19576,6 +19576,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       per_page: 100,
       page: 1
     })
+    console.log(labelsData);
     if (labelsData && labelsData.data) {
       labelsData.data.forEach((label) => {
         allLables[label.description] = label

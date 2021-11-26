@@ -61,6 +61,14 @@ ncc build src/dev.js --license licenses.txt
 ncc build src/index.js --license licenses.txt
 ```
 
+## 新增人员要做的事儿
+1、新人创建github账号（查看打卡规范文档）
+2、新人提交力扣账号、
+3、排行榜增加力扣账号
+4、定花名（同微信群备注）
+5、增加 label 标签
+6、label id增加到github action流水线
+
 ## todo
 
 - [x] 定时创建 issue

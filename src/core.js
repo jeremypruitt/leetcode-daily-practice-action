@@ -16,18 +16,19 @@ module.exports = async function createIssueAction({ owner, repo }) {
     });
 
     // 迭代所有issue https://github.com/octokit/octokit.js#pagination
-    // const iterator = octokit.paginate.iterator(octokit.rest.issues.listForRepo, {
-    //   owner: "octocat",
-    //   repo: "hello-world",
-    //   per_page: 100,
-    // });
+    const iteratorData = octokit.paginate.iterator(octokit.rest.issues.listForRepo, {
+      owner,
+      repo,
+      per_page: 2,
+    });
 
-    // // iterate through each response
-    // for await (const { data: issues } of iterator) {
-    //   for (const issue of issues) {
-    //     console.log("Issue #%d: %s", issue.number, issue.title);
-    //   }
-    // }
+    // iterate through each response
+    for await (const { data: issues } of iteratorData) {
+      for (const issue of issues) {
+        console.log("Issue #%d: %s", issue.number, issue.title);
+        console.log("【每条issue详细信息】", JSON.stringify(issue));
+      }
+    }
 
     // 获取最近的几条issue https://github.com/octokit/octokit.js#graphql-api-queries
     octokit.graphql(
@@ -54,7 +55,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       console.log('lastIssues获取失败', err);
     })
 
-    // 创建issue https://github.com/octokit/octokit.js#rest-api
+    /* // 创建issue https://github.com/octokit/octokit.js#rest-api
     octokit.rest.issues.create({
       owner,
       repo,
@@ -64,7 +65,7 @@ module.exports = async function createIssueAction({ owner, repo }) {
       console.log("issue创建成功啦！！", JSON.stringify(res));
     }).catch((err) => {
       console.log('issue创建失败', err);
-    })
+    }) */
   } catch (err) {
     console.log('end-error', err);
   }

@@ -1,5 +1,5 @@
 const createIssueAction = require("./core");
 createIssueAction({
-  owner: 'xingorg1', 
-  repo: 'leetcodeRank'
+  owner: 'jeremypruitt', 
+  repo: 'swe-interview-prep'
 })
